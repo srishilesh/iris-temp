@@ -2,6 +2,8 @@
 
 > A lightweight, progressive faculty dashboard.
 
+Built with <3
+
 ## Build Setup
 
 ``` bash
