@@ -48,7 +48,7 @@
       >
         <v-icon>mdi-minus</v-icon>
       </v-btn>
-      <v-toolbar-title v-text="title" />
+      <p>Iris - Faculty Dashboard</p>
       <v-spacer />
       <v-btn
         icon
