@@ -1,92 +1,92 @@
 <template>
-        <v-container>
-            <v-row>
-                <v-col>
-                    
-                </v-col>
-                <v-col cols="12" md="4">
-                    <form>
-                        <v-text-field
-                        v-model="firstName"
-                        :error-messages="firstNameErrors"
-                        label="Enter your first name, please :)"
-                        required
-                        outlined
-                        @input="$v.firstName.$touch()"
-                        @blur="$v.firstName.$touch()"
-                        ></v-text-field>
-
-                        <v-text-field
-                        v-model="lastName"
-                        :error-messages="lastNameErrors"
-                        label="Enter your last name, please? :)"
-                        required
-                        outlined
-                        @input="$v.lastName.$touch()"
-                        @blur="$v.lastName.$touch()"
-                        ></v-text-field>
-
-                        <v-text-field
-                        v-model="password"
-                        :error-messages="passwordErrors"
-                        :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-                        @click:append="show =! show"
-                        :type="show ? 'text' : 'password'"
-                        label="Classified! Enter your password"
-                        required
-                        outlined
-                        @input="$v.password.$touch()"
-                        @blur="$v.password.$touch()"
-                        ></v-text-field>
-
-                        <v-text-field
-                        v-model="rollNumber"
-                        :error-messages="rollnoErrors"
-                        label="What's your super unique roll number?"
-                        required
-                        outlined
-                        @input="$v.rollNumber.$touch()"
-                        @blur="$v.rollNumber.$touch()"
-                        ></v-text-field>
+    <v-container>
+        <v-row>
+            <v-col>
                 
-                        <v-text-field
-                        v-model="email"
-                        :error-messages="emailErrors"
-                        label="What's your e-mail address?"
-                        required
-                        outlined
-                        @input="$v.email.$touch()"
-                        @blur="$v.email.$touch()"
-                        ></v-text-field>
+            </v-col>
+            <v-col cols="12" md="4">
+                <form>
+                    <v-text-field
+                    v-model="firstName"
+                    :error-messages="firstNameErrors"
+                    label="Enter your first name, please :)"
+                    required
+                    outlined
+                    @input="$v.firstName.$touch()"
+                    @blur="$v.firstName.$touch()"
+                    ></v-text-field>
 
-                        <v-select   
-                        v-model="gender"
-                        :items="genders"
-                        :error-messages="genderErrors"
-                        label="Select your gender"
-                        required
-                        outlined
-                        @change="$v.gender.$touch()"
-                        @blur="$v.gender.$touch()"
-                        ></v-select>
-                
-                        <v-select   
-                        v-model="branch"
-                        :items="branches"
-                        :error-messages="branchErrors"
-                        label="Select your department"
-                        required
-                        outlined
-                        @change="$v.branch.$touch()"
-                        @blur="$v.branch.$touch()"
-                        ></v-select>
+                    <v-text-field
+                    v-model="lastName"
+                    :error-messages="lastNameErrors"
+                    label="Enter your last name, please? :)"
+                    required
+                    outlined
+                    @input="$v.lastName.$touch()"
+                    @blur="$v.lastName.$touch()"
+                    ></v-text-field>
 
-                        <v-btn class="mr-4" @click="submit">Submit</v-btn>
-                        <v-btn @click="clear">Clear</v-btn>
-                    </form>
-                </v-col>
-            </v-row>
-        </v-container>
+                    <v-text-field
+                    v-model="password"
+                    :error-messages="passwordErrors"
+                    :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                    @click:append="show =! show"
+                    :type="show ? 'text' : 'password'"
+                    label="Classified! Enter your password"
+                    required
+                    outlined
+                    @input="$v.password.$touch()"
+                    @blur="$v.password.$touch()"
+                    ></v-text-field>
+
+                    <v-text-field
+                    v-model="rollNumber"
+                    :error-messages="rollnoErrors"
+                    label="What's your super unique roll number?"
+                    required
+                    outlined
+                    @input="$v.rollNumber.$touch()"
+                    @blur="$v.rollNumber.$touch()"
+                    ></v-text-field>
+            
+                    <v-text-field
+                    v-model="email"
+                    :error-messages="emailErrors"
+                    label="What's your e-mail address?"
+                    required
+                    outlined
+                    @input="$v.email.$touch()"
+                    @blur="$v.email.$touch()"
+                    ></v-text-field>
+
+                    <v-select   
+                    v-model="gender"
+                    :items="genders"
+                    :error-messages="genderErrors"
+                    label="Select your gender"
+                    required
+                    outlined
+                    @change="$v.gender.$touch()"
+                    @blur="$v.gender.$touch()"
+                    ></v-select>
+            
+                    <v-select   
+                    v-model="branch"
+                    :items="branches"
+                    :error-messages="branchErrors"
+                    label="Select your department"
+                    required
+                    outlined
+                    @change="$v.branch.$touch()"
+                    @blur="$v.branch.$touch()"
+                    ></v-select>
+
+                    <v-btn class="mr-4" @click="submit">Submit</v-btn>
+                    <v-btn @click="clear">Clear</v-btn>
+                </form>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 <script>
     import { validationMixin } from 'vuelidate';
