@@ -81,6 +81,14 @@
                     @blur="$v.branch.$touch()"
                     ></v-select>
 
+                    <v-alert type="success" v-if="result === 'success'">
+                        Registration successful!
+                    </v-alert>
+
+                    <v-alert type="error" v-if="result === 'error'">
+                        Error in Registration! Try later.
+                    </v-alert>
+
                     <v-btn class="mr-4" @click="submit">Submit</v-btn>
                     <v-btn @click="clear">Clear</v-btn>
                 </form>
@@ -127,6 +135,8 @@
                     'Female',
                     'Other',
                 ],
+                result: '',
+                msg: ''
             }
         },
 
@@ -137,6 +147,7 @@
                 !this.$v.password.required && errors.push('Password is required!')
                 !this.$v.password.minLength && errors.push('Must be at least 8 characters')
                 !this.$v.password.maxLength && errors.push('Must be at most 20 characters')
+                return errors
             },
 
             branchErrors() {
@@ -173,7 +184,8 @@
             rollnoErrors() {
                 const errors = []
                 if(!this.$v.rollNumber.$dirty) return errors
-                !this.$v.rollNumber
+                !this.$v.rollNumber.required && errors.push('Roll Number is required!')
+                return errors
             },
 
             emailErrors() {
@@ -186,8 +198,27 @@
         },
 
         methods: {
-            submit() {
+            async submit() {
                 this.$v.$touch()
+                await this.$axios
+                    .post("", {
+                        firstName: this.firstName,
+                        lastName: this.lastName,
+                        password: this.password,
+                        rollNumber: this.rollNumber,
+                        email: this.email,
+                        gender: this.gender,
+                        branch: this.branch
+                    })
+                    .then(res => {
+                        this.result = 'success';
+                        this.msg = res.data.message;
+                    })
+                    .catch(err => {
+                        this.result = 'error';
+                        this.msg = err.response.data.message || err.response.data.error || err;
+                        console.log(err);
+                    })
             },
 
             clear() {

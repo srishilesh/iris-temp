@@ -78,14 +78,14 @@ export default {
           to: '/'
         },
         {
-          icon: 'mdi-account-plus',
-          title: 'Register',
-          to: '/register'
-        },
-        {
           icon: 'mdi-login-variant',
           title: 'Login',
           to: '/login'
+        },
+        {
+          icon: 'mdi-account-plus',
+          title: 'Register',
+          to: '/register'
         },
         {
           icon: 'mdi-teach',
