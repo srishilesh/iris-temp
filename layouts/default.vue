@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app :dark="setTheme">
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -49,6 +49,7 @@
       </v-btn>
       <v-row justify="center">Iris - Faculty Dashboard</v-row>
       <v-spacer />
+      <v-switch v-model="goDark"></v-switch>
     </v-app-bar>
     <v-content>
       <v-container>
@@ -71,6 +72,7 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
+      goDark: true,
       items: [
         {
           icon: 'mdi-apps',
@@ -103,6 +105,15 @@ export default {
       rightDrawer: false,
       title: 'Vuetify.js'
     }
+  },
+  computed: {
+      setTheme() {
+        if(this.goDark == true) {
+          return (this.$vuetify.theme.dark = true);
+        } else {
+          return (this.$vuetify.theme.dark = false);
+        }
+      }
   }
 }
 </script>
