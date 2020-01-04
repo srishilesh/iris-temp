@@ -28,7 +28,7 @@
                     ></v-text-field>
 
                     <v-btn class="mr-4" @click="submit">Login</v-btn>
-                    <v-btn @click="submit">Forgot Password</v-btn>
+                    <v-btn @click="submit"><nuxt-link to="/forgot-password" style="text-decoration: none;">Forgot Password!</nuxt-link></v-btn>
                 </form>
             </v-col>
         </v-row>
