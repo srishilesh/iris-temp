@@ -5,7 +5,7 @@
                 
             </v-col>
             <v-col cols="12" md="4">
-                <form>
+                <form method="post" @submit.prevent="recover">
                     <v-text-field
                     v-model="email"
                     label="What's your email?"
@@ -36,7 +36,8 @@
         data() {
             return {
                 email: '',
-                show: false
+                msg: '',
+                result: ''
             }
         },
 
@@ -51,8 +52,19 @@
         },
 
         methods: {
-            forgot () {
-                this.$v.$touch()
+            recover: function() {
+                this.$axios
+                .post('recover', { email: this.email })
+                .then((res) => {
+                    this.result = 'success'
+                    this.msg = res.data.message
+                    setTimeout(() => {this.router.push("/verify"+this.email)}, 1500)
+                })
+                .catch((err) => {
+                    this.result = 'error'
+                    this.msg = err.response.data.message || err.response.data.error || err;
+                    console.log(err)
+                })
             }
         }
     }
