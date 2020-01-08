@@ -30,7 +30,6 @@ app.post("/login", function (req, res) {
     let rem_chk = req.body.rem; //checkin remember or not
     let message = "";
 
-
     conn.connect(function (err) {
         if (rem_chk === '1') { //value of remember checkbox is '1'
             conn.query("UPDATE iris_db.emp_login SET f_remember='1' WHERE f_uname='" + user + "'", function (error, rows, fields) {
@@ -57,6 +56,9 @@ app.post("/login", function (req, res) {
             res.send({"message": message});
         })
     });
+})
+
+app.post('/register', function(req, res) {
     
 })
 
