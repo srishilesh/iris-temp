@@ -59,7 +59,7 @@ app.post("/login", function (req, res) {
     });
 })
 
-app.post('/forgotpass', callName);
+app.post('/forgotpassword', callName);
 
 function callName(req, res) {
     var spawn = require("child_process").spawn;
@@ -119,9 +119,9 @@ function insertotp(email, otp, date, time) {
 }
 
 app.post('/verifyotp', function(req, res) {
-    let email = req.body.email_id;
-    let otp = req.body.otp;
-    let pass = req.body.new_pass;
+    let email = req.body.email_id; //useer email id
+    let otp = req.body.otp; //otp
+    let pass = req.body.new_pass; //new passowrd
     let date = new Date().toLocaleDateString();
     let time = new Date().toLocaleTimeString();
     let message = "";
@@ -155,7 +155,7 @@ app.post('/register', function (req, res) {
     let fdoj = req.body.fdoj;
     let fgender = req.body.fgender;
     let flname = req.body.flname;
-    let fpass = req.bosy.fpass;
+    let fpass = req.body.fpass;
     let message = "";
     // const userExists = prisma.$exists.user({f_roll:roll})
     conn.connect(function (err) {
@@ -173,7 +173,7 @@ app.post('/register', function (req, res) {
                     });
                 });
             } else {
-                message = "failure"; //user already exits
+                message = "user already exists"; //user already exits
                 res.send({
                     "message": message
                 });
