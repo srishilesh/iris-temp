@@ -135,7 +135,7 @@ app.post('/register',function(req,res) {
     conn.connect(function(err) {
         if (err) throw err;
         console.log("Connected!");
-        con.query('SELECT * FROM emp_details WHERE f_email=?;', [femail], function(err, rows, fields) {
+        con.query('SELECT * FROM iris_db.emp_details WHERE f_email=?;', [femail], function(err, rows, fields) {
             if(err) throw err;
             if(rows.length == 0) { //user doesnt exist 
                 con.query("INSERT INTO iris_db.emp_details (f_roll, f_fname,f_dob,f_email,f_phone,f_address, f_doj, f_gender, f_lname, f_password) VALUES (?,?,?,?,?,?)",[froll,fname,fdob,femail,fphone,faddr, fdoj, fgender, flname, fpass], function (err, result) {
