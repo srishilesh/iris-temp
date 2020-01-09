@@ -24,7 +24,8 @@ app.get("/", function (req, res) {
     });
 });
 
-app.post("/login", function (req, res) {
+//login 
+app.post("/login", function (req, res) { 
     let user = req.body.email; //username - email id of faculty
     let pass = req.body.pswrd; //entered password
     let rem_chk = req.body.rem; //checkin remember or not
@@ -58,7 +59,7 @@ app.post("/login", function (req, res) {
         })
     });
 })
-
+//forgot password
 app.post('/forgotpassword', callName);
 
 function callName(req, res) {
@@ -118,6 +119,7 @@ function insertotp(email, otp, date, time) {
         });
 }
 
+//verify OTP and reset new password
 app.post('/verifyotp', function(req, res) {
     let email = req.body.email_id; //useer email id
     let otp = req.body.otp; //otp
@@ -145,6 +147,7 @@ app.post('/verifyotp', function(req, res) {
     });
 })
 
+//new user registration
 app.post('/register', function (req, res) {
     let froll = req.body.froll;
     let fname = req.body.fname;
@@ -178,6 +181,54 @@ app.post('/register', function (req, res) {
                     "message": message
                 });
             }
+        })
+    });
+})
+
+app.post('/check_balance_leave', function(req, res) {
+    let email = req.body.email_id;
+    let absent;
+    let present;
+    let ml;
+    let cl;
+    let od;
+    let lp;
+
+    let ml_remaining; //remaining medical leave
+    let cl_remaining; //remaining casual leave
+
+    const MEDICAL_LEAVE = 5;
+    const CASUAL_LEAVE = 6;
+    
+
+    conn.connect(function(err) {
+        if(err) throw err
+        //(0-CL, 1-OD, 2-ML, 3-Loss of Pay leave) (-1 if present)
+        conn.query(`select leave_type, count(*) as cnt from emp_attendance where f_email=? group by leave_type order by leave_type ASC;`, [email], function(error, rows, fields) {
+            if(err) throw err
+            cl = rows[1].cnt; //casual leave count
+            od = rows[2].cnt; //OD count
+            ml = rows[3].cnt; //medical leave count
+            lp = rows[4].cnt; //loss of pay leave count
+            present = rows[0].cnt+od; //present days count (including OD)
+            absent = cl+od+ml; //total absent count
+            let tot_work = present+absent-od;
+            ml_remaining = MEDICAL_LEAVE-ml;
+            cl_remaining = CASUAL_LEAVE-cl;
+
+            let response = {
+                "message": "success",
+                "total working days": tot_work,
+                "present count": present,
+                "absent count": absent,
+                "ml used": ml,
+                "cl used": cl,
+                "od used": od,
+                "lp used": lp,
+                "ml remaining": ml_remaining,
+                "cl remaining": cl_remaining
+            };
+            res.send(response);
         })
     });
 })
