@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <script>
+            fetch('http://localhost:8081/${check_balance_leave}', {
+        method: 'post'
+    })
+    .then(res => {
+        return res.json()
+      })
+    .then((response) => {
+        console.log('res: ' + JSON.stringify(response))
+    })
+            </script>
+    </head>
+    <body>
+        <form action="/email_faculty_summary" method="POST">
+            <!-- Roll number: <input type="text" id="roll" name="roll"/><br/> -->
+            Email address: <input type="email" id="email" name="email"/><br/>
+            <!-- Date: <input type="date" id="date" name="date"/><br/>
+            Attendance Status: <select name="status" id="status">
+                <option value="1">Present</option>
+                <option value="0">absent</option>
+            </select><br/>
+            Leave Type: <select name="leave_type" id="leave_type">
+                <option value="-1"></option>
+                <option value="0">Casual Leave</option>
+                <option value="1">On Duty</option>
+                <option value="2">Medical Leave</option>
+                <option value="3">Loss of Pay leave</option>
+            </select><br/>
+            Reason for leave: <textarea id="reason"></textarea><br/> -->
+            <input type="submit" value="Submit"/>
+        </form>
+    </body>
+</html>
