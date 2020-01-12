@@ -15,7 +15,7 @@ cl_remaining = sys.argv[11]
 
 s = smtplib.SMTP('smtp.gmail.com',587)
 s.starttls()
-s.login('thehawkblack00@gmail.com','phantom19')
+s.login('thehawkblack00@gmail.com','')
 SUBJECT = "Iris: Attendance Report Summary"
 TEXT = "Date: "+date+"\nTime: "+time+"\nNumber of Causal Leave taken: "+cl+"\nNumber of Medical Leave taken: "+ml+"\nNumber of OD's taken: "+od+"\nNumber of Loss of Pay leave taken: "+lp+"\nNumber of days present: "+present+"\nNumber of days absent: "+absent+"\nNumber of Medical leaves that can be taken: "+ml_remaining+"\nNumber of Casual Leaves that can be taken: "+cl_remaining
 
