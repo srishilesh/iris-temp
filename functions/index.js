@@ -309,7 +309,7 @@ app.post('/download_faculty_attendance_report', function(req, res) {
             // if(err) throw err
             console.log('leave data retrieved');
             let date = new Date(); // add date&tijme to file name
-            res.xls('report-'+date+'.xlsx', rows);
+            res.xls('faculty_report-'+date+'.xlsx', rows);
         })
     });
 });
