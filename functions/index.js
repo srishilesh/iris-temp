@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
+var json2xls = require('json2xls');
 
 var credentials = {
     host: "iris-se-database.mysql.database.azure.com",
@@ -17,6 +18,8 @@ var conn = mysql.createConnection(credentials);
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+app.use(json2xls.middleware);
 
 app.get("/", function (req, res) {
     res.send({
@@ -295,4 +298,22 @@ function emailFacultySummary(req, res) {
 });
 };
 
-app.listen(8081);
+// request from dwnload button to download attendance report of faculty in EXCEL format
+app.post('/download_faculty_attendance_report', function(req, res) {
+    let email = req.body.email;    
+
+    conn.connect(function(err) {
+        // if(err) throw err
+        //(0-CL, 1-OD, 2-ML, 3-Loss of Pay leave) (-1 if present)
+        conn.query(`select * from emp_attendance where f_email=?;`, [email], function(error, rows, fields) {
+            // if(err) throw err
+            console.log('leave data retrieved');
+            let date = new Date(); // add date&tijme to file name
+            res.xls('report-'+date+'.xlsx', rows);
+        })
+    });
+});
+
+let server = app.listen(8081, () => {
+    console.log("Listening on port " + server.address().port + "...");
+});
