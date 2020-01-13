@@ -314,6 +314,27 @@ app.post('/download_faculty_attendance_report', function(req, res) {
     });
 });
 
+// request from dwnload button to download attendance report of a class in EXCEL format
+app.post('/download_class_attendance_report', function(req, res) {
+    let email = req.body.email;
+    let date = req.body.date; // mm/dd/yyyy
+    let course_code = req.body.ccode;
+    let dept = req.body.dept;
+    let sec = req.body.section;
+    let sem = req.body.semester;
+    let batch = req.body.batch;
+    conn.connect(function(err) {
+        // if(err) throw err
+        //(0-absent, 1-present, 2-OD)
+        conn.query(`select s_roll, department, section, semester, batch, c_date, c_period, attd_status, course_code from student_attendance where f_email=? and c_date=? and course_code=? and department=? and section=? and semester=? and batch=?;`, [email, date, course_code, dept, sec, sem, batch], function(error, rows, fields) {
+            // if(err) throw err
+            console.log('student report data retrieved');
+            let date = new Date(); // add date&tijme to file name
+            res.xls('student_report-'+date+'.xlsx', rows);
+        })
+    });
+});
+
 let server = app.listen(8081, () => {
     console.log("Listening on port " + server.address().port + "...");
 });
