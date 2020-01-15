@@ -356,6 +356,27 @@ app.post('/generate_fa_list', function(req, res) {
     });
 });
 
+//POST request to download FA list in xcel format - executed after clicking download button.
+app.post('/download_fa_list', function(req, res) {
+    let email = req.body.email; //faculty email id
+    let course_code = req.body.ccode;
+    let dept = req.body.dept;
+    let sec = req.body.section;
+    let sem = req.body.semester;
+    let batch = req.body.batch;
+
+    const total_working_days = 2;
+    const attendance_threshold = 0.5; //50 percent
+    conn.connect(function(err) {
+        conn.query(`select s_roll, count(*)/? as percent from student_attendance where f_email=? and course_code=? and department=? and section=? and semester=? and batch=?  and (attd_status='1' or attd_status='2') group by s_roll having percent<=?;`, [total_working_days, email, date, course_code, dept, sec, sem, batch, attendance_threshold], function(error, rows, fields) {
+            // if(err) throw err
+            console.log('FA report data retrieved');
+            let date = new Date(); // add date&tijme to file name
+            res.xls('fa_report-'+date+'.xlsx', rows);
+        })
+    });
+});
+
 let server = app.listen(8081, () => {
     console.log("Listening on port " + server.address().port + "...");
 });
