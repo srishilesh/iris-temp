@@ -8,7 +8,7 @@ function send_email_otp(req,res,conn){
     var date = new Date().toLocaleDateString();
     var time = new Date().toLocaleTimeString();
     insertotp(conn,toaddr, otp, date, time);
-    var process = spawn('python', ["./email_send.py", (toaddr), (otp), date, time]);
+    var process = spawn('python', ["./forgot_password_email_send.py", (toaddr), (otp), date, time]);
     process.stdout.on('data', function (data) {
         res.send({
             "message": "success"

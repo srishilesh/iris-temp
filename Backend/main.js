@@ -55,7 +55,8 @@ app.post("/login", function (req, res) {
 
 //new user registration
 app.post('/register', function (req, res) {
-  register.register(req, res, conn);
+  register.send_email_otp(req, res, conn);
+  register.verifyotp(req,res,conn);
 })
 
 // Forgot password, sending OTP email and insertion into the database
