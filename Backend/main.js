@@ -80,8 +80,13 @@ app.post('/check_balance_leave', function(req, res,) {
 	faculty_attendance.check_balance_leave(req, res, conn);
 })
 
-app.post('/email_faculty_summary',emailFacultySummary);
+app.post('/email_faculty_summary', function(req, res) {
+	faculty_attendance.email_faculty_summary(req, res, conn);
+})
 
+app.post('/download_faculty_attendance_report', function(req, res) {
+	faculty_attendance.download_faculty_attendance_report(req, res, conn);
+})
 let server = app.listen(8081, () => {
   console.log("Listening on port " + server.address().port + "...");
 });
