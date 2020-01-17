@@ -1,8 +1,9 @@
 var forgotpassword = require('./forgot_password.js')
 var login = require('./login.js')
 var register = require('./register.js')
-var fa_report = require('./fa_report')
-var faculty_attendance = require('./faculty_attendance')
+var fa_report = require('./fa_report.js')
+var faculty_attendance = require('./faculty_attendance.js')
+var class_attendance = require('./class_attendance.js')
 
 var express = require('express');
 var app = express();
@@ -86,6 +87,10 @@ app.post('/email_faculty_summary', function(req, res) {
 
 app.post('/download_faculty_attendance_report', function(req, res) {
 	faculty_attendance.download_faculty_attendance_report(req, res, conn);
+})
+
+app.post('/download_class_attendance_report', function(req, res) {
+	class_attendance.download_class_attendance_report(erq, res, conn);
 })
 let server = app.listen(8081, () => {
   console.log("Listening on port " + server.address().port + "...");
