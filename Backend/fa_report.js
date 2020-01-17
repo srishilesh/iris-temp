@@ -37,6 +37,7 @@ function download_fa_list(req, res, conn) {
     })
   });
 }
+
 module.exports = {
   generate_fa_list,
   download_fa_list
