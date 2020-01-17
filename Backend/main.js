@@ -92,6 +92,10 @@ app.post('/download_faculty_attendance_report', function(req, res) {
 app.post('/download_class_attendance_report', function(req, res) {
 	class_attendance.download_class_attendance_report(erq, res, conn);
 })
+
+app.post('/calculate_free_student_leave', function(req, res) {
+  class_attendance.calculate_free_student_leave(req, res, conn);
+})
 let server = app.listen(8081, () => {
   console.log("Listening on port " + server.address().port + "...");
 });
