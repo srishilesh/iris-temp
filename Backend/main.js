@@ -52,7 +52,7 @@ app.post('/register', function (req, res) {
 
 // Forgot password, sending OTP email and insertion into the database
 app.post('/forgotpassword',function(req,res){
-    forgotpassword.email_otp(req,res,conn);
+    forgotpassword.send_email_otp(req,res,conn);
 
 });
 
