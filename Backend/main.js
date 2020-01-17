@@ -1,7 +1,7 @@
 var forgotpassword = require('./forgot_password.js')
 var login = require('./login.js')
 var register = require('./register.js')
-var fa_report = require('./fa_report')
+var fa_report = require('./fa_report').default
 
 var express = require('express');
 var app = express();
