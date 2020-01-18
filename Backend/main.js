@@ -4,6 +4,7 @@ var register = require('./register.js')
 var fa_report = require('./fa_report.js')
 var faculty_attendance = require('./faculty_attendance.js')
 var class_attendance = require('./class_attendance.js')
+var student = require('./student.js')
 
 var express = require('express');
 var app = express();
@@ -45,6 +46,9 @@ app.get("/", function (req, res) {
   res.sendFile("sample_attendance.html", {
     root: __dirname
   });
+  // res.sendFile("fa.html", {
+  //   root: __dirname
+  // });
 });
 
 
@@ -78,6 +82,10 @@ app.post('/download_fa_list', function(req, res) {
 	fa_report.download_fa_list(req, res, conn);
 })
 
+app.post('/email_fa_warning_list',function(req,res){
+  fa_report.send_fa_report_email(req,res,conn);
+})
+
 app.post('/check_balance_leave', function(req, res,) {
 	faculty_attendance.check_balance_leave(req, res, conn);
 })
@@ -97,6 +105,15 @@ app.post('/download_class_attendance_report', function(req, res) {
 app.post('/calculate_free_student_leave', function(req, res) {
   class_attendance.calculate_free_student_leave(req, res, conn);
 })
+
+app.post('/update_student_marks',function(req,res){
+  student.insert_student_marks(req,res,conn);
+})
+
+app.post('/download_student_marks_report',function(req,res){
+  student.download_student_marks_report(req,res,conn);
+})
+
 let server = app.listen(8081, () => {
   console.log("Listening on port " + server.address().port + "...");
 });
