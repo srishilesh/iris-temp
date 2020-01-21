@@ -14,6 +14,6 @@ TEXT = "It is bring to your notice that your child the attendance in the course 
 
 message = 'Subject: {}\n\n{}'.format(SUBJECT, TEXT)
 s.sendmail("thehawkblack00@gmail.com",toaddr,message)
-# print("Email sent successfully to ",toaddr, " on ",date," at ",time)
+print("Email sent successfully to ",toaddr, " on ",date," at ",time)
 
 s.quit()
