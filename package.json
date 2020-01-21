@@ -11,16 +11,17 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@azure/storage-blob": "^12.0.0",
     "@nuxtjs/auth": "^4.8.5",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/pwa": "^3.0.0-0",
+    "@types/dotenv": "^4.0.3",
+    "dotenv": "^6.0.0",
+    "jasmine": "^3.5.0",
     "json2xls": "^0.1.2",
     "mysql": "^2.17.1",
     "nuxt": "^2.0.0",
-    "vuelidate": "^0.7.4",
-    "@azure/storage-blob": "^12.0.0",
-    "@types/dotenv": "^4.0.3",
-    "dotenv": "^6.0.0"
+    "vuelidate": "^0.7.4"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.0.0"
