@@ -25,10 +25,10 @@ main().then(() => console.log('Done')).catch((ex) => console.log(ex.message));
 const blobServiceClient = BlobServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTION_STRING);
 
 var credentials = {
-  host: "iris-se-database.mysql.database.azure.com",
+  host: "http://iris-aws-db.c4hq5iosxryf.us-east-1.rds.amazonaws.com/",
   port: "3306",
-  user: "iris_se@iris-se-database",
-  password: "Soft20ware",
+  user: "admin",
+  password: "#!Pascal1050ti",
   database: 'iris_db', //database: "azureDB", (YOU MUST SPECIFY THE NAME OF THE DATABASE CREATED IN CLOUD, NOT THE NAME OF THE CONNECTION IN WORKBENCH)
   ssl: true //ssl=true (TYPO)
 };
