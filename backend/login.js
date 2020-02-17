@@ -1,8 +1,8 @@
 function login(req,res,conn){
 
     let user = req.body.email; //username - email id of faculty
-    let pass = req.body.pswrd; //entered password
-    let rem_chk = req.body.rem; //checkin remember or not
+    let pass = req.body.password; //entered password
+    let rem_chk = req.body.remember; //checkin remember or not
     let message = "";
     console.log("rem "+rem_chk)
     conn.connect(function (err) {
