@@ -7,12 +7,11 @@
             <v-col cols="12" md="4">
                 <form>
                     <v-text-field
-                    v-model="rollNumber"
-                    label="What's your super unique roll number?"
+                    v-model="email"
+                    label="What's your email?"
                     required
                     outlined
-                    @input="$v.rollNumber.$touch()"
-                    @blur="$v.rollNumber.$touch()"
+
                     ></v-text-field>
                     
                     <v-text-field
@@ -23,9 +22,13 @@
                     label="Classified! Enter your password"
                     required
                     outlined
-                    @input="$v.password.$touch()"
-                    @blur="$v.password.$touch()"
+                    
                     ></v-text-field>
+
+                    <v-checkbox
+                    v-model="checkbox"
+                    :label="`Remember Me? : ${checkbox}`"
+                    ></v-checkbox>
 
                     <v-btn class="mr-4" @click="submit">Login</v-btn>
                     <v-btn @click="submit"><nuxt-link to="/forgot-password" style="text-decoration: none;">Forgot Password!</nuxt-link></v-btn>
@@ -42,15 +45,18 @@
         mixins: [validationMixin],
 
         validations: {
-            rollNumber: { required },
-            password: { required }
+            email: { required },
+            password: { required },
+            remember : { required }
         },
 
         data() {
             return {
                 rollNumber: '',
                 password: '',
-                show: false
+                remember: '',
+                show: false,
+                checkbox: false
             }
         },
 
@@ -60,7 +66,27 @@
 
         methods: {
             submit() {
-                this.$v.$touch()
+                this.login()
+            },
+            async login() {
+                await this.$axios
+                    .post("localhost:8081/login", {
+                        email: this.email,
+                        password: this.password,
+                        remember: this.remember
+                    })
+                    .then(res => {
+                        this.result = 'success';
+                        this.msg = res.data.message;
+                    })
+                    .catch(err => {
+                        this.result = 'error';
+                        this.msg = err.response.data.message || err.response.data.error || err;
+                        console.log(err);
+                    })
+            },
+            touch() {
+
             }
         }
     }

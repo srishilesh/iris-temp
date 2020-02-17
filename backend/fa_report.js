@@ -85,10 +85,8 @@ function retrieve_parent_email(rows,conn){
       });
       // mail = email[i].parent_email;
       
-      })
+      }
       
-    }
-
 }
 
 function sending_email_parent(email,ccode)

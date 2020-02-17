@@ -96,8 +96,13 @@ export default {
         },
         {
           icon: 'mdi-account-card-details',
-          title: 'Student Details',
-          to: '/student'
+          title: 'Class Details',
+          to: '/class'
+        },
+        {
+          icon: 'mdi-account-clock',
+          title: 'Notifications',
+          to: '/notifications'
         }
       ],
       miniVariant: false,
