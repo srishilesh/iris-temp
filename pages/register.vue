@@ -4,7 +4,7 @@
             <v-col>
                 
             </v-col>
-            <v-col cols="12" md="4">
+            <v-col cols="12" md="5">
                 <form>
                     <v-text-field
                     v-model="firstName"
@@ -89,9 +89,12 @@
                         Error in Registration! Try later.
                     </v-alert>
 
-                    <v-btn class="mr-4" @click="submit">Submit</v-btn>
+                    <v-btn class="mr-4" @click="redir">Submit</v-btn>
                     <v-btn @click="clear">Clear</v-btn>
                 </form>
+            </v-col>
+            <v-col>
+                
             </v-col>
         </v-row>
     </v-container>
@@ -219,6 +222,10 @@
                         this.msg = err.response.data.message || err.response.data.error || err;
                         console.log(err);
                     })
+            },
+
+            redir() {
+                this.$router.push("/login")
             },
 
             clear() {

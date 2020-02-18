@@ -9,6 +9,7 @@ var student = require('./student.js')
 var express = require('express');
 var app = express();
 var mysql = require('mysql');
+var mysql2 = require('mysql2');
 var bodyParser = require('body-parser');
 var json2xls = require('json2xls');
 
@@ -25,19 +26,26 @@ main().then(() => console.log('Done')).catch((ex) => console.log(ex.message));
 const blobServiceClient = BlobServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTION_STRING);
 
 var credentials = {
-  host: "http://iris-aws-db.c4hq5iosxryf.us-east-1.rds.amazonaws.com/",
+  host: "iris-aws-db.c4hq5iosxryf.us-east-1.rds.amazonaws.com",
   port: "3306",
   user: "admin",
   password: "#!Pascal1050ti",
-  database: 'iris_db', //database: "azureDB", (YOU MUST SPECIFY THE NAME OF THE DATABASE CREATED IN CLOUD, NOT THE NAME OF THE CONNECTION IN WORKBENCH)
-  ssl: true //ssl=true (TYPO)
+  database: 'iris_db' //database: "azureDB", (YOU MUST SPECIFY THE NAME OF THE DATABASE CREATED IN CLOUD, NOT THE NAME OF THE CONNECTION IN WORKBENCH)
+  // ssl: true //ssl=true (TYPO)
 };
 
-var conn = mysql.createConnection(credentials);
+var conn = mysql2.createConnection(credentials);
 app.use(json2xls.middleware);
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', "*");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+})
 
 app.get("/", function (req, res) {
   // res.send({

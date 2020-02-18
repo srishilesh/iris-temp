@@ -3,7 +3,7 @@ function check_balance_leave(req, res, conn) {
     let absent;
     let present;
     let ml;
-    let cl;
+    let cl = '';
     let od;
     let lp;
 
@@ -17,8 +17,9 @@ function check_balance_leave(req, res, conn) {
     conn.connect(function(err) {
         // if(err) throw err
         //(0-CL, 1-OD, 2-ML, 3-Loss of Pay leave) (-1 if present)
-        conn.query(`select leave_type, count(*) as cnt from emp_attendance where f_email=? group by leave_type order by leave_type ASC;`, [email], function(error, rows, fields) {
-            // if(err) throw err
+        conn.query(`select leave_type, count(*) as cnt from emp_attendance where f_email='`+this.email+`' group by leave_type order by leave_type ASC;`, [email], function(error, rows, fields) {
+            if(err) throw err
+            console.log(this.email);
             console.log('leave data retrieved');
             cl = rows[1].cnt; //casual leave count
             od = rows[2].cnt; //OD count

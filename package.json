@@ -22,7 +22,9 @@
     "jasmine": "^3.5.0",
     "json2xls": "^0.1.2",
     "mysql": "^2.18.1",
+    "mysql2": "^2.1.0",
     "nuxt": "^2.0.0",
+    "vue-grd": "^1.2.2",
     "vuelidate": "^0.7.4"
   },
   "devDependencies": {
