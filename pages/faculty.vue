@@ -3,7 +3,9 @@
     <v-card-title class="text-center justify-center py-6">
       <h1 class="font-weight-bold display-3 basil--text">Faculty Details</h1>
     </v-card-title>
-
+    <div style="display: none">
+      Welcome 
+    </div>
     <v-tabs
       v-model="tab"
       background-color="transparent"

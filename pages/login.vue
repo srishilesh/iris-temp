@@ -31,7 +31,7 @@
                     ></v-checkbox>
 
                     <v-btn class="mr-4" @click="kang()">Login</v-btn>
-                    <v-btn @click="submit"><nuxt-link to="/forgot-password" style="text-decoration: none;">Forgot Password!</nuxt-link></v-btn>
+                    <v-btn id="loginButton" @click="submit"><nuxt-link to="/forgot-password" style="text-decoration: none;">Forgot Password!</nuxt-link></v-btn>
                 </form>
             </v-col>
         </v-row>

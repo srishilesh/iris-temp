@@ -89,7 +89,7 @@
                         Error in Registration! Try later.
                     </v-alert>
 
-                    <v-btn class="mr-4" @click="redir">Submit</v-btn>
+                    <v-btn id="registerButton" class="mr-4" @click="redir">Submit</v-btn>
                     <v-btn @click="clear">Clear</v-btn>
                 </form>
             </v-col>
