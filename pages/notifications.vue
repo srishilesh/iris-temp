@@ -32,7 +32,7 @@
             color="#385F73"
             dark
           >
-            <v-card-title class="headline">Team bi0s</v-card-title>
+            <v-card-title class="headline">NEWS!</v-card-title>
 
             <v-card-subtitle>Amrita Team bi0s Member Discovers Security Bug in QEMU</v-card-subtitle>
           </v-card>
