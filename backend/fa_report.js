@@ -87,7 +87,7 @@ function retrieve_parent_email(rows,conn){
       
       }
       
-}
+    }
 
 function sending_email_parent(email,ccode)
 {
@@ -100,6 +100,7 @@ function sending_email_parent(email,ccode)
     console.log("Sending email to "+roll)
     return
 }
+
 module.exports = {
   generate_fa_list,
   download_fa_list,
