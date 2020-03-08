@@ -1,0 +1,13 @@
+npm init
+npm install jasmine --save
+node node_modules/jasmine/bin/jasmine init
+
+create app.js (main function/API to test)
+create spec/app.spec.js (test cases)
+
+install express and request
+add module.exports = server in app.js
+
+write test cases in app.spec.js
+
+node node_modules/jasmine/bin/jasmine (to test testcases)
