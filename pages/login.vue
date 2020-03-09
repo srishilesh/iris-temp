@@ -30,7 +30,7 @@
                     :label="`Remember Me? : ${checkbox}`"
                     ></v-checkbox>
 
-                    <v-btn id="loginButton" class="mr-4" @click="kang()">Login</v-btn>
+                    <v-btn id="loginButton" class="mr-4" @click="loginUser()">Login</v-btn>
                     <v-btn @click="submit"><nuxt-link to="/forgot-password" style="text-decoration: none;">Forgot Password!</nuxt-link></v-btn>
                 </form>
             </v-col>
@@ -50,10 +50,13 @@
             remember : { required }
         },
 
+        middleware: ['auth'],
+
         data() {
             return {
                 rollNumber: '',
                 password: '',
+                email: '',
                 remember: '',
                 show: false,
                 checkbox: false
@@ -65,37 +68,27 @@
         },
 
         methods: {
-            submit() {
-                this.login()
-            },
-            kang() {
-                if(this.email == 'srishilesh@gmail.com' && this.password == 'password123') {
-                    console.log("heh")
-                    this.$router.push("/faculty")
-                } else {
-                    this.$router.push("/error")
-                }
-            },
-            async login() {
-                await this.$axios
-                    .post("localhost:8081/login", {
-                        email: this.email,
-                        password: this.password,
-                        remember: this.remember
-                    })
-                    .then(res => {
-                        this.result = 'success';
-                        this.msg = res.data.message;
-                    })
-                    .catch(err => {
-                        this.result = 'error';
-                        this.msg = err.response.data.message || err.response.data.error || err;
-                        console.log(err);
-                    })
+            // async loginUser() {
+            //     this.$store.dispatch('auth/login', {
+            //         email: this.email,
+            //         password: this.password
+            //     }).then(result => {
+            //         this.alert = {type: 'success', message: result.data.message}
+            //         this.$router.push('/')
+            //     }).catch(error => {
+            //         if (error.response && error.response.data) {
+            //         this.alert = {type: 'error', message: error.response.data.message || error.reponse.status}
+            //         }
+            //     })
             },
             touch() {
 
             }
-        }
+        },
+        beforeCreate() {
+            if(this.$auth.loggedIn) {
+                this.$router.push('/')
+            }
+        },
     }
 </script>

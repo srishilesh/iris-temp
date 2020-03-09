@@ -48,7 +48,12 @@
       >
       </v-btn>
       <v-row justify="center">Iris - Faculty Dashboard</v-row>
-      <v-spacer />
+      <p v-if="user">
+        Hello, {{user.email}}
+      </p>
+      <p v-else>
+
+      </p>
       <v-switch v-model="goDark"></v-switch>
     </v-app-bar>
     <v-content>
@@ -118,6 +123,9 @@ export default {
         } else {
           return (this.$vuetify.theme.dark = false);
         }
+      },
+      user() {
+        return (this.$store.state.auth || {}).user || null
       }
   }
 }
