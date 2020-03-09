@@ -41,6 +41,8 @@
     import { validationMixin } from "vuelidate"
     import { required } from "vuelidate/lib/validators"
 
+    import firebase from 'firebase'
+
     export default {
         mixins: [validationMixin],
 
@@ -63,6 +65,16 @@
             }
         },
 
+        asyncData() {
+            return {
+                authenticatedUser: null
+            }
+        },
+
+        created() {
+            firebase.auth().onAuthStateChanged(user => (this.authenticatedUser = user))
+        },
+
         computed: {
 
         },
@@ -80,7 +92,7 @@
             //         this.alert = {type: 'error', message: error.response.data.message || error.reponse.status}
             //         }
             //     })
-            },
+            // },
             touch() {
 
             }

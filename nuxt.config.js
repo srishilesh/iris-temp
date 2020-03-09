@@ -15,6 +15,11 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+        {
+        src: 'https://www.gstatic.com/firebasejs/7.10.0/firebase-app.js'
+      }
     ]
   },
   /*
@@ -29,8 +34,7 @@ export default {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-  ],
+  plugins: ['~/plugins/firebase.js'],
   /*
   ** Nuxt.js dev-modules
   */
