@@ -5,7 +5,7 @@
                 
             </v-col>
             <v-col cols="12" md="5">
-                <form>
+                <form @submit.prevent="register">
                     <v-text-field
                     v-model="email"
                     :error-messages="emailErrors"
@@ -50,7 +50,7 @@
                         Error in Registration! Try later.
                     </v-alert>
 
-                    <v-btn id="registerButton" class="mr-4" @click="register">Submit</v-btn>
+                    <v-btn id="registerButton" class="mr-4" type="submit">Submit</v-btn>
                     <v-btn @click="clear">Clear</v-btn>
                 </form>
             </v-col>
@@ -142,24 +142,21 @@
             }
         },
 
-        asyncData() {
-            return {
-                authenticatedUser: null
-            }
-        },
-
-        created() {
-            firebase.auth().onAuthStateChanged(user => (this.authenticatedUser = user))
-        },
+        
 
         methods: {
             register() {
-                firebase
-                    .auth()
-                    .createUserWithEmailAndPassword(this.email, this.password)
-                if(this.authenticatedUser) {
-                    this.$router.push("/")
-                }
+                this.$store.dispatch('signUp', {
+                    email: this.email,
+                    password: this.password
+                })
+                .then(() => {
+                    this.email = ''
+                    this.password = ''
+                })
+                .catch(err => {
+                    alert(err.message)
+                })
             },
 
             redir() {

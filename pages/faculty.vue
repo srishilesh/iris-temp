@@ -53,32 +53,10 @@
       <v-tab-item>
         <v-card>
 
-          <vue-grid align="top" justify="between">
-              <vue-cell width=6of12>
-                <p class="box">Update Attendance before 30th March</p>
-              </vue-cell>
-              <vue-cell width=6of12>
-                <p class="box">Conduct Class Committee Meeting</p>
-              </vue-cell>
-              <vue-cell width=6of12>
-                <p class="box">Collect exam scripts</p>
-              </vue-cell>
-              <vue-cell width=6of12>
-                <p class="box">Conduct session on higher studies</p>
-              </vue-cell>
-              <vue-cell width=6of12>
-                <p class="box">Update Attendance before 30th March</p>
-              </vue-cell>
-              <vue-cell width=6of12>
-                <p class="box">Update Marks on AUMS</p>
-              </vue-cell>
-              <vue-cell width=6of12>
-                <p class="box">Paper Publishing Deadline - 28th Feb</p>
-              </vue-cell>
-              <vue-cell width=6of12>
-                <p class="box">Generate FA Warning List</p>
-              </vue-cell>
-          </vue-grid>
+          <input v-model="myTodo" />
+          <button @click="addToDo">Add</button>
+          <div v-if="errors !== ''" id="errors">{{ errors }}</div>
+
         </v-card>
       </v-tab-item>
       <v-tab-item>
@@ -196,6 +174,8 @@
             attendance: 'Absent'
           },
         ],
+        myTodo: '',
+        errors: ''
       }
     },
     components: {
@@ -217,8 +197,16 @@
             console.log(this.result)
           })
       },
-      view() {
+    
+      addToDo() {
+        console.log("myTodo: "+this.myTodo)
+        this.errors = ''
 
+        if(this.myTodo !== '') {
+
+        } else {
+          this.errors = 'Please enter some text'
+        }
       }
     }
   }

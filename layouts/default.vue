@@ -48,12 +48,10 @@
       >
       </v-btn>
       <v-row justify="center">Iris - Faculty Dashboard</v-row>
-      <p v-if="user">
-        Hello, {{user.email}}
-      </p>
-      <p v-else>
-
-      </p>
+      <div>
+        <nuxt-link to="/login">Login</nuxt-link>
+        <button @click="signOut" v-if="$store.state.user">Logout</button>
+      </div>
       <v-switch v-model="goDark"></v-switch>
     </v-app-bar>
     <v-content>
@@ -71,6 +69,9 @@
 </template>
 
 <script>
+
+import mapGetters from 'vuex'
+
 export default {
   data () {
     return {
@@ -117,6 +118,11 @@ export default {
     }
   },
   computed: {
+
+       ...mapGetters({
+        user: 'user'
+      }), 
+      
       setTheme() {
         if(this.goDark == true) {
           return (this.$vuetify.theme.dark = true);
@@ -124,9 +130,14 @@ export default {
           return (this.$vuetify.theme.dark = false);
         }
       },
-      user() {
-        return (this.$store.state.auth || {}).user || null
-      }
+  },
+
+  methods: {
+    signOut(err) {
+      this.$store.dispatch("signOut").catch(err => {
+        alert(err.message);
+      })
+    }
   }
 }
 </script>

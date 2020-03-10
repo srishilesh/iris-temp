@@ -5,7 +5,7 @@
                 
             </v-col>
             <v-col cols="12" md="4">
-                <form>
+                <form @submit.prevent="signIn">
                     <v-text-field
                     v-model="email"
                     label="What's your email?"
@@ -30,7 +30,7 @@
                     :label="`Remember Me? : ${checkbox}`"
                     ></v-checkbox>
 
-                    <v-btn id="loginButton" class="mr-4" @click="loginUser()">Login</v-btn>
+                    <v-btn id="loginButton" class="mr-4">Login</v-btn>
                     <v-btn @click="submit"><nuxt-link to="/forgot-password" style="text-decoration: none;">Forgot Password!</nuxt-link></v-btn>
                 </form>
             </v-col>
@@ -48,8 +48,8 @@
 
         validations: {
             email: { required },
-            password: { required },
-            remember : { required }
+            password: { required }
+            // remember : { required }
         },
 
         middleware: ['auth'],
@@ -65,42 +65,33 @@
             }
         },
 
-        asyncData() {
-            return {
-                authenticatedUser: null
-            }
-        },
-
-        created() {
-            firebase.auth().onAuthStateChanged(user => (this.authenticatedUser = user))
-        },
-
         computed: {
 
         },
 
         methods: {
-            // async loginUser() {
-            //     this.$store.dispatch('auth/login', {
-            //         email: this.email,
-            //         password: this.password
-            //     }).then(result => {
-            //         this.alert = {type: 'success', message: result.data.message}
-            //         this.$router.push('/')
-            //     }).catch(error => {
-            //         if (error.response && error.response.data) {
-            //         this.alert = {type: 'error', message: error.response.data.message || error.reponse.status}
-            //         }
-            //     })
-            // },
+            signIn() {
+                this.$store.dispatch("signInWithEmail", {
+                    email: this.email,
+                    password: this.password
+                })
+                .then(() => {
+                    this.email = ''
+                    this.password = ''
+                })
+                .catch(err => {
+                    alert(err.message)
+                });
+            },
+
             touch() {
 
             }
         },
-        beforeCreate() {
-            if(this.$auth.loggedIn) {
-                this.$router.push('/')
-            }
-        },
+        // beforeCreate() {
+        //     if(this.$auth.loggedIn) {
+        //         this.$router.push('/')
+        //     }
+        // },
     }
 </script>
