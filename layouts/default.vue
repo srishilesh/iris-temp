@@ -70,7 +70,7 @@
 
 <script>
 
-import mapGetters from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -119,17 +119,17 @@ export default {
   },
   computed: {
 
-       ...mapGetters({
-        user: 'user'
-      }), 
-      
-      setTheme() {
-        if(this.goDark == true) {
-          return (this.$vuetify.theme.dark = true);
-        } else {
-          return (this.$vuetify.theme.dark = false);
-        }
-      },
+    ...mapGetters({
+      user: 'user'
+    }),
+
+    setTheme() {
+      if(this.goDark == true) {
+        return (this.$vuetify.theme.dark = true);
+      } else {
+        return (this.$vuetify.theme.dark = false);
+      }
+    },
   },
 
   methods: {
