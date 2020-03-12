@@ -19,7 +19,8 @@
     "exclude": [
       "**/node_modules/**",
       "**/test/**",
-      "**/coverage/**"
+      "**/coverage/**",
+      "**/summa.js"
     ],
     "all": true
   },
