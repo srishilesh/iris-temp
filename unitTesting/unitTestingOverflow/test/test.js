@@ -11,7 +11,6 @@ describe('Testing Faculty Backend Website', function () {
     
     //When done is passed in, Mocha will wait until the call to done(), or until the timeout expires. done also accepts an error parameter when signaling completion.
     it('should read the todolist.txt file successfully', function (done) { // <= Pass in done callback
- 
         requester
             .get('/')
             .end(function (err, res) {
@@ -153,6 +152,7 @@ describe('Testing Faculty Backend Website', function () {
                 done();
             })
     });
+
     it("download class report - invalid", () => {
         var input = {
             "email":"hello",
@@ -172,5 +172,26 @@ describe('Testing Faculty Backend Website', function () {
                 done();
             })
     });
+
+    it("generate FA report - success", () => {
+        var input = {
+            'email': 'srrishilesh@gmail.com', //faculty email id
+            'ccode': '15cse381',
+            'dept': 'cse',
+            'section': 'e',
+            'semester': '6',
+            'batch': '2017',
+        }
+        requester
+            .post('/generate_fa_list')
+            .send(input)
+            .then(function(res) {
+                console.log('then post my 9');
+                expect(res.body.message).to.equal('FA report generated');
+                done();
+            })
+    });
+
+    
     
 });
