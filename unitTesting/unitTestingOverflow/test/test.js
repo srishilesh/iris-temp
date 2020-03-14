@@ -192,6 +192,22 @@ describe('Testing Faculty Backend Website', function () {
             })
     });
 
-    
-    
+    it('retrieve student leave available', () => {
+        var input = {
+            'email': 'srrishilesh@gmail.com', //faculty email id
+            'ccode': '15cse381',
+            'dept': 'cse',
+            'section': 'e',
+            'semester': '6',
+            'batch': '2017',
+        }
+        requester
+            .post('/calculate_free_student_leave')
+            .send(input)
+            .then(function(res) {
+                console.log('then post my 10');
+                expect(res.body.message).to.equal('success');
+                done();
+            })
+    });
 });
